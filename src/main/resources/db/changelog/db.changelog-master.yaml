@@ -1,0 +1,33 @@
+databaseChangeLog:
+  - changeSet:
+      id: 1
+      author: liquibase-docs
+      changes:
+        -  createTable:
+             tableName:  my_table
+             columns:
+               -  column:
+                    name:  id
+                    type:  long
+                    constraints:
+                      primaryKey: true
+                      nullable: false
+               - column:
+                   name: name
+                   type: varchar(255)
+                   constraints:
+                     nullable: false
+  - changeSet:
+      id: 2
+      author: liquibase-docs
+      changes:
+        - insert:
+            columns:
+              - column:
+                  name: id
+                  value: 1
+              - column:
+                  name: name
+                  value: Me
+            dbms: 'h2'
+            tableName: my_table
