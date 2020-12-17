@@ -1,4 +1,4 @@
-package com.popov.hospital.payload.request;
+package com.popov.hospital.controllers.payload.request;
 
 import javax.validation.constraints.NotBlank;
 

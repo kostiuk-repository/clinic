@@ -1,10 +1,38 @@
 databaseChangeLog:
   - changeSet:
       id: 1
-      author: liquibase-docs
+      author: popov
       changes:
         -  createTable:
-             tableName:  my_table
+             tableName:  users
+             columns:
+               -  column:
+                    name:  id
+                    type:  long
+                    constraints:
+                      primaryKey: true
+                      nullable: false
+               - column:
+                   name: username
+                   type: varchar(20)
+                   constraints:
+                     nullable: false
+               - column:
+                   name: email
+                   type: varchar(50)
+                   constraints:
+                     nullable: false
+               - column:
+                   name: password
+                   type: varchar(120)
+                   constraints:
+                     nullable: false
+  - changeSet:
+      id: 2
+      author: popov
+      changes:
+        -  createTable:
+             tableName:  roles
              columns:
                -  column:
                     name:  id
@@ -14,20 +42,27 @@ databaseChangeLog:
                       nullable: false
                - column:
                    name: name
-                   type: varchar(255)
+                   type: varchar(20)
                    constraints:
                      nullable: false
   - changeSet:
-      id: 2
-      author: liquibase-docs
+      id: 3
+      author: popov
       changes:
-        - insert:
+        - createTable:
+            tableName: user_roles
             columns:
               - column:
-                  name: id
-                  value: 1
+                  name: user_id
+                  type: long
+                  constraints:
+                    nullable: false
+                    foreignKeyName: fk_user_id
+                    references: users(id)
               - column:
-                  name: name
-                  value: Me
-            dbms: 'h2'
-            tableName: my_table
+                  name: role_id
+                  type: long
+                  constraints:
+                    nullable: false
+                    foreignKeyName: fk_role_id
+                    references: roles(id)

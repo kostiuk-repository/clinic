@@ -1,4 +1,4 @@
-package com.popov.hospital.payload.response;
+package com.popov.hospital.controllers.payload.response;
 
 public class MessageResponse {
 	private String message;
