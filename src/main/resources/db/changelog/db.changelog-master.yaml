@@ -66,3 +66,51 @@ databaseChangeLog:
                     nullable: false
                     foreignKeyName: fk_role_id
                     references: roles(id)
+  - changeSet:
+      id:  4
+      author:  popov
+      changes:
+        -  insert:
+             columns:
+               -  column:
+                    name:  id
+                    value:  1
+               -  column:
+                    name:  username
+                    value:  admin
+               -  column:
+                    name:  email
+                    value:  admin@admin.ru
+               -  column:
+                    name:  password
+                    value:  admin
+             dbms:  'h2'
+             tableName:  users
+  - changeSet:
+      id:  5
+      author:  popov
+      changes:
+        -  insert:
+             columns:
+               -  column:
+                    name:  id
+                    value:  1
+               -  column:
+                    name:  name
+                    value:  ROLE_ADMIN
+             dbms:  'h2'
+             tableName:  roles
+  - changeSet:
+      id:  6
+      author:  popov
+      changes:
+        -  insert:
+             columns:
+               -  column:
+                    name:  user_id
+                    value:  1
+               -  column:
+                    name:  role_id
+                    value:  1
+             dbms:  'h2'
+             tableName:  user_roles
