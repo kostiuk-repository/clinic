@@ -1,0 +1,36 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Add patient</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+	<link type="text/css" rel="stylesheet" th:href="@{css/bootstrap.min.css}" />
+</head>
+<body>
+<div class="container">
+	<h1>New patient</h1>
+	<div class="col-md-4">
+		<form th:object="${patient}" th:action="@{save}" action="#" method="post">
+			<input type="text" th:field="*{firstName}" class="form-control"
+				placeholder="Firstname" />
+			<div style="clear: both; display: block; height: 10px;"></div>
+			<input type="text" th:field="*{lastName}" class="form-control"
+				placeholder="Lastname" />
+			<div style="clear: both; display: block; height: 10px;"></div>
+			<input type="text" th:field="*{ward}" class="form-control"
+				placeholder="Ward" />
+			<div style="clear: both; display: block; height: 10px;"></div>	
+			<input type="text" th:field="*{doctor}" class="form-control"
+				placeholder="Doctor" />
+			<div style="clear: both; display: block; height: 10px;"></div>
+			<input type="date" class="form-control" th:field="*{dateOfRegistration}"
+				   th:value="${#dates.format(dateOfRegistration, 'dd-MM-yyyy')}" />
+			<div style="clear: both; display: block; height: 10px;"></div>
+			<input type="date" class="form-control" th:field="*{dateOfDischarge}"
+				   th:value="${#dates.format(dateOfDischarge, 'dd-MM-yyyy')}" />
+			<div style="clear: both; display: block; height: 10px;"></div>
+			<input type="submit" class="btn btn-primary" value="Save"></input>
+		</form>
+	</div>
+</div>
+</body>
+</html>
