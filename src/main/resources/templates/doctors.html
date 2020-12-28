@@ -56,8 +56,8 @@
     		<td th:text="${doctor.email}"></td>
     		<td th:text="${doctor.telephoneNumber}"></td>
 			<td sec:authorize="hasAnyAuthority('ADMIN', 'DOCTOR')" >
-				<a sec:authorize="hasAnyAuthority('ADMIN',)" th:href="@{/edit/{id}(id=${doctor.id})}" class="btn btn-primary btn-xs">Edit</a>
-				<a sec:authorize="hasAnyAuthority('ADMIN',)" th:href="@{/delete/{id}(id=${doctor.id})}" class="btn btn-danger btn-xs">Delete</a>
+				<a sec:authorize="hasAnyAuthority('ADMIN',)" th:href="@{/edit/doctor/{id}(id=${doctor.id})}" class="btn btn-primary btn-xs">Edit</a>
+				<a sec:authorize="hasAnyAuthority('ADMIN',)" th:href="@{/delete/doctor/{id}(id=${doctor.id})}" class="btn btn-danger btn-xs">Delete</a>
 			</td>
     	</tr>
     </table>

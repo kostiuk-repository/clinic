@@ -49,7 +49,7 @@
 		    <th>Diagnoses</th>
 		    <th>Date Of Registration</th>
 		    <th>Date Of Discharge</th>
-		    <th sec:authorize="hasAnyAuthority('ADMIN', 'DOCTOR')">Actions</th>
+		    <th>Actions</th>
 		</tr>  
     	<tr th:each = "patient : ${patients}">
     		<td th:text="${patient.firstName} + ' ' + ${patient.lastName}"></td>
@@ -62,10 +62,10 @@
     		</td>
 			<td th:text="${#dates.format(patient.dateOfRegistration, 'dd-MM-yyyy')}"></td>
 			<td th:text="${#dates.format(patient.dateOfDischarge, 'dd-MM-yyyy')}"></td>
-    		<td sec:authorize="hasAnyAuthority('ADMIN', 'DOCTOR')" >
+    		<td>
     			<a th:href="@{/addPatientDiagnose/{id}(id=${patient.id})}" class="btn btn-primary btn-xs">Diagnose History</a>
-    			<a sec:authorize="hasAnyAuthority('ADMIN', 'DOCTOR')" th:href="@{/edit/doctor/{id}(id=${patient.id})}" class="btn btn-primary btn-xs">Edit</a>
-    			<a sec:authorize="hasAnyAuthority('ADMIN', 'DOCTOR')" th:href="@{/delete/doctor/{id}(id=${patient.id})}" class="btn btn-danger btn-xs">Delete</a>
+    			<a sec:authorize="hasAnyAuthority('ADMIN', 'DOCTOR')" th:href="@{/edit/{id}(id=${patient.id})}" class="btn btn-primary btn-xs">Edit</a>
+    			<a sec:authorize="hasAnyAuthority('ADMIN', 'DOCTOR')" th:href="@{/delete/{id}(id=${patient.id})}" class="btn btn-danger btn-xs">Delete</a>
     		</td>
     	</tr>
     </table>
