@@ -1,9 +1,6 @@
 package com.popov.hospital.web;
 
-import com.popov.hospital.domain.Diagnose;
-import com.popov.hospital.domain.DiagnoseRepository;
-import com.popov.hospital.domain.Patient;
-import com.popov.hospital.domain.PatientRepository;
+import com.popov.hospital.domain.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -19,6 +16,9 @@ public class PatientController {
 
 	@Autowired
     private DiagnoseRepository diagnoseRepository;
+
+	@Autowired
+	private DoctorRepository doctorRepository;
 	
 	@RequestMapping("/login")
 	public String login() {
@@ -28,13 +28,16 @@ public class PatientController {
 	@RequestMapping("/patients")
 	public String index(Model model) {
 		List<Patient> patients = (List<Patient>) patientRepository.findAll();
+
 		model.addAttribute("patients", patients);
+		model.addAttribute("doctors", doctorRepository.findAll());
     	return "patients";
     }
 
     @RequestMapping(value = "add")
     public String addPatient(Model model){
     	model.addAttribute("patient", new Patient());
+		model.addAttribute("doctors", doctorRepository.findAll());
         return "addPatient";
     }	
 

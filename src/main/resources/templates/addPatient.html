@@ -19,8 +19,10 @@
 			<input type="text" th:field="*{ward}" class="form-control"
 				placeholder="Ward" />
 			<div style="clear: both; display: block; height: 10px;"></div>
-			<input type="text" th:field="*{doctor}" class="form-control"
-				placeholder="Doctor" />
+			<select class="form-control" th:field="*{doctor.id}">
+				<option value="0">select doctor</option>
+				<option th:each="doctor : ${doctors}" th:value="${doctor.id}" th:text="${doctor.fio}"></option>
+			</select>
 			<div style="clear: both; display: block; height: 10px;"></div>
 			<input type="date" class="form-control" th:field="*{dateOfRegistration}"
 				   th:value="${#dates.format(dateOfRegistration, 'dd-MM-yyyy')}" />

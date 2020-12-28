@@ -20,25 +20,16 @@
 		</form>
 	</div>
 	<div class="col-md-4" style="padding:0 20px">
-		<form>
-			<input type="text" class="form-control"
-				   placeholder="Firstname" />
-			<div style="clear: both; display: block; height: 10px;"></div>
-			<input type="text" class="form-control"
-				   placeholder="Lastname" />
-			<div style="clear: both; display: block; height: 10px;"></div>
-			<input type="text" class="form-control"
-				   placeholder="Ward" />
-			<div style="clear: both; display: block; height: 10px;"></div>
-			<input type="text" class="form-control"
-				   placeholder="Doctor" />
-			<div style="clear: both; display: block; height: 10px;"></div>
-			<input type="date" class="form-control" />
-			<div style="clear: both; display: block; height: 10px;"></div>
-			<input type="date" class="form-control" />
-			<div style="clear: both; display: block; height: 10px;"></div>
-			<input type="submit" class="btn btn-primary" >
-		</form>
+		<table class="table table-striped">
+		<tr>
+			<th>Name</th>
+			<th>Doctor</th>
+		</tr>
+		<tr th:each = "patient : ${patients}">
+			<td th:text="${patient.firstName} + ' ' + ${patient.lastName}"></td>
+			<td th:text="${patient.doctor}"></td>
+		</tr>
+	</table>
 	</div>
     <div class="col-md-8" style="padding:0 20px">
     <table class="table table-striped">

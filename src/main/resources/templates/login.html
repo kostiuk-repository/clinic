@@ -1,28 +1,29 @@
 <!DOCTYPE HTML>
-<html xmlns:th="http://www.thymeleaf.org">
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
 <head>
-    <link type="text/css" rel="stylesheet" href="/css/bootstrap.min.css" th:href="@{css/bootstrap.min.css}" />
+    <title>Patient list</title>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-    <title>Online Hospital login</title>
+    <link type="text/css" rel="stylesheet" th:href="@{../css/bootstrap.min.css}" />
 </head>
 <body>
-    <div class="col-md-4 col-md-offset-5" style="margin-top: 250px">
-        <div class="alert alert-danger" th:if="${param.error}">
-            Invalid username and password.
-        </div>
-        <div class="alert alert-warning" th:if="${param.logout}">
-            You have been logged out.
-        </div>
-        <form th:action="@{/login}" method="post">
-            <div><label> User Name : <input type="text" name="username" class="form-control"/> </label></div>
-            <div><label> Password: <input type="password" name="password" class="form-control"/> </label></div>
-            <div><input type="submit" value="Sign In" class="btn btn-primary"/></div>
-        </form>
-        <form th:action="@{/login}" method="post" style="margin-top : 10px">
-            <input type="hidden" name="username" value="nurse">
-            <input type="hidden" name="password" value="nurse">
-            <div><input type="submit" value="Sign In As Nurse" class="btn btn-primary"/></div>
-        </form>
+<div class="col-md-4 col-md-offset-5" style="margin-top: 250px">
+    <div class="alert alert-danger" th:if="${param.error}">
+        Invalid username and password.
     </div>
+    <div class="alert alert-warning" th:if="${param.logout}">
+        You have been logged out.
+    </div>
+    <form th:action="@{/login}" method="post">
+        <div><label> User Name : <input type="text" name="username" class="form-control"/> </label></div>
+        <div><label> Password: <input type="password" name="password" class="form-control"/> </label></div>
+        <div><input type="submit" value="Sign In" class="btn btn-primary"/></div>
+    </form>
+    <form th:action="@{/login}" method="post" style="margin-top : 10px">
+        <input type="hidden" name="username" value="nurse">
+        <input type="hidden" name="password" value="nurse">
+        <div><input type="submit" value="Sign In As Nurse" class="btn btn-primary"/></div>
+    </form>
+</div>
 </body>
 </html>
