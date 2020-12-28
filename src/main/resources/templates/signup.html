@@ -20,8 +20,27 @@
 			<input type="password" th:field="*{passwordCheck}" class="form-control"
 				placeholder="Re-enter Password" />
 			<p th:if="${#fields.hasErrors('passwordCheck')}" th:errors="*{passwordCheck}">Password Match Error</p>
-			
-			<div style="clear: both; display: block; height: 10px;"></div>	
+			<div style="clear: both; display: block; height: 10px;"></div>
+			<input type="text" th:field="*{fio}" class="form-control"
+				   placeholder="FIO" />
+			<p th:if="${#fields.hasErrors('fio')}" th:errors="*{fio}">FIO Error</p>
+			<div style="clear: both; display: block; height: 10px;"></div>
+			<input type="text" th:field="*{email}" class="form-control"
+				   placeholder="Email" />
+			<p th:if="${#fields.hasErrors('email')}" th:errors="*{email}">Email Error</p>
+			<div style="clear: both; display: block; height: 10px;"></div>
+			<input type="text" th:field="*{post}" class="form-control"
+				   placeholder="Post" />
+			<p th:if="${#fields.hasErrors('post')}" th:errors="*{post}">Post Error</p>
+			<div style="clear: both; display: block; height: 10px;"></div>
+			<input type="text" th:field="*{address}" class="form-control"
+				   placeholder="Address" />
+			<p th:if="${#fields.hasErrors('address')}" th:errors="*{address}">Address Error</p>
+			<div style="clear: both; display: block; height: 10px;"></div>
+			<input type="text" th:field="*{telephoneNumber}" class="form-control"
+				   placeholder="Telephone Number" />
+			<p th:if="${#fields.hasErrors('telephoneNumber')}" th:errors="*{telephoneNumber}">Telephone Number Error</p>
+			<div style="clear: both; display: block; height: 10px;"></div>
 			<input type="submit" class="btn btn-primary" value="Save"></input>		
 		</form>
 	</div>

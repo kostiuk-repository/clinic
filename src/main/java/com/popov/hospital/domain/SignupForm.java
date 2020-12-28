@@ -1,6 +1,7 @@
 package com.popov.hospital.domain;
 
 import javax.persistence.Column;
+import javax.validation.constraints.Email;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.Size;
 
@@ -21,18 +22,24 @@ public class SignupForm {
     private String role = "DOCTOR";
 
 	@Column(name = "post")
+	@Size(min=4, max=30)
 	private String post;
 
 	@Column(name = "address")
+	@Size(min=4, max=30)
 	private String address;
 
 	@Column(name = "fio")
+	@NotEmpty
+	@Size(min=6, max=255)
 	private String fio;
 
 	@Column(name = "email", unique = true)
+	@Email
 	private String email;
 
 	@Column(name = "telephone_number", unique = true)
+	@Size(min=4, max=30)
 	private String telephoneNumber;
 
 	public String getUsername() {
