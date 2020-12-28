@@ -1,7 +1,8 @@
 package com.popov.hospital.web;
 
+import com.popov.hospital.domain.Doctor;
+import com.popov.hospital.domain.DoctorRepository;
 import com.popov.hospital.domain.SignupForm;
-import com.popov.hospital.domain.User;
 import com.popov.hospital.domain.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
@@ -17,7 +18,9 @@ import javax.validation.Valid;
 @Controller
 public class UserController {
 	@Autowired
-    private UserRepository repository;
+    private UserRepository userRepository;
+	@Autowired
+    private DoctorRepository doctorRepository;
 	
     @RequestMapping(value = "signup")
     public String addPatient(Model model){
@@ -34,12 +37,19 @@ public class UserController {
 		    	BCryptPasswordEncoder bc = new BCryptPasswordEncoder();
 		    	String hashPwd = bc.encode(pwd);
 	
-		    	User newUser = new User();
-		    	newUser.setPasswordHash(hashPwd);
-		    	newUser.setUsername(signupForm.getUsername());
-		    	newUser.setRole("DOCTOR");
-		    	if (repository.findByUsername(signupForm.getUsername()) == null) {
-		    		repository.save(newUser);
+		    	Doctor newDoctor = new Doctor();
+				newDoctor.setPasswordHash(hashPwd);
+				newDoctor.setUsername(signupForm.getUsername());
+				newDoctor.setRole(signupForm.getRole());
+				newDoctor.setAddress(signupForm.getAddress());
+				newDoctor.setEmail(signupForm.getEmail());
+				newDoctor.setFio(signupForm.getFio());
+				newDoctor.setPost(signupForm.getPost());
+				newDoctor.setTelephoneNumber(signupForm.getTelephoneNumber());
+
+		    	if (userRepository.findByUsername(signupForm.getUsername()) == null &&
+						doctorRepository.findByUsername(signupForm.getUsername()) == null ) {
+		    		doctorRepository.save(newDoctor);
 		    	}
 		    	else {
 	    			bindingResult.rejectValue("username", "error.userexists", "Username already exists");    	

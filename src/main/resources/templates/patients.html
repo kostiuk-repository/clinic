@@ -2,14 +2,14 @@
 <html xmlns:th="http://www.thymeleaf.org" 
 	xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
 <head>
-    <title>Patientlist</title>
+    <title>Patient list</title>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 	<link type="text/css" rel="stylesheet" th:href="@{../css/bootstrap.min.css}" />
 </head>
 <body>
 <div class="container">
 	<div class="col-md-4">
-		<h1>Patients</h1>
+		<h3>Patients</h3>
 	</div>
 	<div class="col-md-4">
 		<h3 th:inline="text">Welcome [[${#httpServletRequest.remoteUser}]]</h3>
@@ -19,8 +19,19 @@
 			<input type="submit" value="Sign Out" class="btn btn-danger"/>
 		</form>
 	</div>
-    
-    <div style="padding:0 20px">
+	<div class="col-md-4" style="padding:0 20px">
+		<table class="table table-striped">
+		<tr>
+			<th>Name</th>
+			<th>Doctor</th>
+		</tr>
+		<tr th:each = "patient : ${patients}">
+			<td th:text="${patient.firstName} + ' ' + ${patient.lastName}"></td>
+			<td th:text="${patient.doctor}"></td>
+		</tr>
+	</table>
+	</div>
+    <div class="col-md-8" style="padding:0 20px">
     <table class="table table-striped">
 		<tr>
 		    <th>Name</th>
@@ -33,7 +44,7 @@
 		</tr>  
     	<tr th:each = "patient : ${patients}">
     		<td th:text="${patient.firstName} + ' ' + ${patient.lastName}"></td>
-    		<td th:text="${patient.doctor}"></td>
+    		<td th:text="${patient.doctor.fio}"></td>
     		<td th:text="${patient.ward}"></td>
     		<td>
 				<span th:each="diagnose,iterStat : ${patient.diagnoses}">

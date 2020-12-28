@@ -9,22 +9,33 @@ import java.util.Set;
 
 @Entity
 public class Patient {
-	private long id;	 
-	private String firstName;	
+	@Id
+	@Column(name = "patient_id", insertable = false, updatable = false)
+	@GeneratedValue(strategy=GenerationType.AUTO)
+	private long id;
+	@Column(name = "firstname")
+	private String firstName;
+	@Column(name = "lastname")
 	private String lastName;
+	@Column(name = "ward")
 	private String ward;
-    private String doctor;
 	@DateTimeFormat(iso= DateTimeFormat.ISO.DATE)
+	@Column(name = "dateOfRegistration")
     private Date dateOfRegistration;
 	@DateTimeFormat(iso= DateTimeFormat.ISO.DATE)
+	@Column(name = "dateOfDischarge")
     private Date dateOfDischarge;
-
+	@ManyToMany(cascade = CascadeType.MERGE)
+	@JoinTable(name = "patient_diagnose", joinColumns = { @JoinColumn(name = "id") }, inverseJoinColumns = { @JoinColumn(name = "diagnoseId") })
 	private Set<Diagnose> diagnoses = new HashSet<Diagnose>(0);
-    
+	@ManyToOne
+	@JoinColumn(name="id", nullable = false)
+	private Doctor doctor;
+
     public Patient() {
     }
 
-	public Patient(String firstName, String lastName, String ward, String doctor, Date dateOfRegistration, Date dateOfDischarge) {
+	public Patient(String firstName, String lastName, String ward, Doctor doctor, Date dateOfRegistration, Date dateOfDischarge) {
 		super();
 		this.firstName = firstName;
 		this.lastName = lastName;
@@ -34,8 +45,6 @@ public class Patient {
 		this.dateOfDischarge = dateOfDischarge;
 	}
 
-    @Id
-    @GeneratedValue(strategy=GenerationType.AUTO)	
 	public long getId() {
 		return id;
 	}
@@ -44,7 +53,6 @@ public class Patient {
 		this.id = id;
 	}
 
-    @Column(name = "firstname")   	
 	public String getFirstName() {
 		return firstName;
 	}
@@ -53,7 +61,6 @@ public class Patient {
 		this.firstName = firstName;
 	}
 
-    @Column(name = "lastname")	
 	public String getLastName() {
 		return lastName;
 	}
@@ -62,7 +69,6 @@ public class Patient {
 		this.lastName = lastName;
 	}
 
-    @Column(name = "ward")
 	public String getWard() {
 		return ward;
 	}
@@ -71,16 +77,14 @@ public class Patient {
 		this.ward = ward;
 	}
 
-    @Column(name = "doctor")
-    public String getDoctor() {
+    public Doctor getDoctor() {
 		return doctor;
 	}
 
-	public void setDoctor(String doctor) {
+	public void setDoctor(Doctor doctor) {
 		this.doctor = doctor;
 	}
 
-	@Column(name = "getDateOfRegistration")
 	public Date getDateOfRegistration() {
 		return dateOfRegistration;
 	}
@@ -89,7 +93,6 @@ public class Patient {
 		this.dateOfRegistration = dateOfRegistration;
 	}
 
-	@Column(name = "getDateOfDischarge")
 	public Date getDateOfDischarge() {
 		return dateOfDischarge;
 	}
@@ -98,8 +101,6 @@ public class Patient {
 		this.dateOfDischarge = dateOfDischarge;
 	}
 
-	@ManyToMany(cascade = CascadeType.MERGE)
-	@JoinTable(name = "patient_diagnose", joinColumns = { @JoinColumn(name = "id") }, inverseJoinColumns = { @JoinColumn(name = "diagnoseId") })
 	public Set<Diagnose> getDiagnoses() {
 		return this.diagnoses;
 	}
