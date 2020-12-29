@@ -88,21 +88,21 @@ public class PatientController {
     
     
     @RequestMapping(value="/patient/{id}/diagnoses", method=RequestMethod.GET)
-	public String patientsAddDiagnose(@RequestParam(value="action", required=true) String action, @PathVariable Long id, @RequestParam Long diagnoseId, Model model) {
-    	Optional<Diagnose> diagnose = diagnoseRepository.findById(diagnoseId);
+	public String patientsAddDiagnose(@RequestParam(value="action", required=true) String action, @PathVariable Long id, @RequestParam(required=false) Long diagnoseId, Model model) {
 		Optional<Patient> patient = patientRepository.findById(id);
 
 		if (patient.isPresent() && action.equalsIgnoreCase("save")) {
+			Optional<Diagnose> diagnose = diagnoseRepository.findById(diagnoseId);
 			if (!patient.get().hasDiagnose(diagnose.get())) {
 				patient.get().getDiagnoses().add(diagnose.get());
 			}
 			patientRepository.save(patient.get());
 			model.addAttribute("patient", diagnoseRepository.findById(id));
-			model.addAttribute("diagnoses", diagnoseRepository.findAll());
+			model.addAttribute("diagnoses", diagnoseRepository.findByPatientId(id));
 			return "redirect:/patients";
 		}
 
-		model.addAttribute("developers", patientRepository.findAll());
+		model.addAttribute("patients", patientRepository.findAll());
 		return "redirect:/patients";
 		
 	}    

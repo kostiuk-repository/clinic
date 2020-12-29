@@ -49,7 +49,12 @@ public class HospitalApplication {
 			patientRepository.save(patientFive);
 
 			Stream.of("Cold", "Grip", "Coronavirus", "Inflammation stealth").forEach(name -> {
-				diagnoseRepository.save(new Diagnose(name));
+				Diagnose diagnose = new Diagnose();
+				diagnose.setName(name);
+				diagnose.setPatient(patientFive);
+				diagnose.setTherapy("Cure");
+				diagnose.setSymptoms("Feel bad. Head pain all time.");
+				diagnoseRepository.save(diagnose);
 			});
 
 			doctor.setPatients(Set.of(patientOne, patientTwo, patientThree, patientFour, patientFive));

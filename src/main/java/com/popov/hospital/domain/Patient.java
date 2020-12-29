@@ -25,9 +25,8 @@ public class Patient {
 	@DateTimeFormat(iso= DateTimeFormat.ISO.DATE)
 	@Column(name = "dateOfDischarge")
     private Date dateOfDischarge;
-	@ManyToMany(cascade = CascadeType.MERGE)
-	@JoinTable(name = "patient_diagnose", joinColumns = { @JoinColumn(name = "id") }, inverseJoinColumns = { @JoinColumn(name = "diagnoseId") })
-	private Set<Diagnose> diagnoses = new HashSet<Diagnose>(0);
+	@OneToMany(mappedBy = "patient")
+	private Set<Diagnose> diagnoses = new HashSet<>();
 	@ManyToOne
 	@JoinColumn(name="id", nullable = false)
 	private Doctor doctor;

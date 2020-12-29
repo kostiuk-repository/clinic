@@ -1,39 +1,50 @@
 <!DOCTYPE HTML>
-<html xmlns:th="http://www.thymeleaf.org">
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.w3.org/1999/xhtml">
 <head>
-	<title>Developer</title>
+	<title>History of Patient Diseases</title>
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 	<link type="text/css" rel="stylesheet" th:href="@{../css/bootstrap.min.css}" />	
 </head>
 <body>
 <div class="container">
-	<h1>Add diagnose</h1>
-	<form th:action="@{/patient/{id}/diagnoses(id=${patient.id})}" method="get" enctype="multipart/form-data" >
+	<div class="col-md-12 align-items-center justify-content-center" style=" text-align: center;"><h1>History of Patient Diseases</h1></div>
 	<div class="col-md-4">
-		<div class="panel panel-default">
-		 <div class="panel-heading">Patient info</div>
-		 <div class="panel-body" style="padding-left: 5px;">
-			Name: <b th:text="${patient.firstName}" /> <b th:text="${patient.lastName}" /><br/>
-			Doctor: <span th:text="${patient.doctor}" /><br/>
-			Ward: <span th:text="${patient.ward}" /><br/>
-			<br/>Diagnoses:
-				<span th:each="diagnose : ${patient.diagnoses}">
-					<br/>&nbsp;&nbsp;<span th:text="${diagnose.name}" />
-				</span>
-				<br/>
+		<form th:action="@{/patient/{id}/diagnoses(id=${patient.id})}" method="get" enctype="multipart/form-data" >
+			<div class="panel panel-default">
+			 <div class="panel-heading">Diagnose info</div>
+				 <div class="panel-body" style="padding-left: 5px;">
+					Name: <b th:text="${patient.firstName}" /> <b th:text="${patient.lastName}" /><br/>
+					Doctor: <b th:text="${patient.doctor.fio}" /><br/>
+					Ward: <span th:text="${patient.ward}" /><br/>
+
 				</div>
-		</div>	
-			<div class="col-md-6">
-			<select class="form-control" name="diagnoseId">
-				<option th:each="diagnose : ${diagnoses}"
-					th:value="${diagnose.diagnoseId}"
-					th:text="${diagnose.name}">Diagnose</option>
-			</select>
 			</div>
-			<input type="submit" name="action" class="btn btn-primary" value="Save"></input>
-			<input type="submit" name="action" class="btn btn-default" value="Cancel"></input>
+				<input sec:authorize="hasAuthority('DOCTOR')" type="submit" name="action" class="btn btn-primary" value="Save">
+				<input type="submit" name="action" class="btn btn-default" value="Back">
+		</form>
 	</div>
-	</form>
+	<div class="col-md-6 align-items-center justify-content-center" style=" text-align: center;"><h1>Hospital history</h1></div>
+	<div class="col-md-2 align-items-center justify-content-center" style=" text-align: center;">
+		<a sec:authorize="hasAuthority('DOCTOR')" href="/addDiagnose" class="btn btn-primary">Add Diagnose</a>
+	</div>
+	<div class="col-md-8" style="padding:0 20px">
+		<table class="table table-striped">
+			<tr>
+				<th>Diagnose</th>
+				<th>Therapy</th>
+				<th>Symptoms</th>
+				<th>Actions</th>
+			</tr>
+			<tr th:each = "diagnose : ${diagnoses}">
+				<td th:text="${diagnose.name}"></td>
+				<td th:text="${diagnose.therapy}"></td>
+				<td th:text="${diagnose.symptoms}"></td>
+				<td>
+					<a sec:authorize="hasAnyAuthority('DOCTOR')" th:href="@{//{id}(id=${patient.id})}" class="btn btn-primary btn-xs">Edit Diagnose</a>
+				</td>
+			</tr>
+		</table>
+	</div>
 </div>
 </body>
 </html>

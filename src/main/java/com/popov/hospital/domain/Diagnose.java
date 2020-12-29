@@ -10,10 +10,17 @@ public class Diagnose {
 	private long diagnoseId;
 	
     @Column(name="diagnosename")
-	private String name; 
-     
-    @ManyToMany(mappedBy = "diagnoses")
-    private Set<Patient> patients;
+	private String name;
+
+	@Column(name="therapy")
+	private String therapy;
+
+	@Column(name="symptoms")
+	private String symptoms;
+
+	@ManyToOne
+	@JoinColumn(name="id", nullable = false)
+    private Patient patient;
 
     public Diagnose() {
 	}
@@ -38,11 +45,27 @@ public class Diagnose {
 		this.name = name;
 	}
 
-	public Set<Patient> getPatients() {
-		return patients;
+	public Patient getPatient() {
+		return patient;
 	}
 
-	public void setPatients(Set<Patient> patients) {
-		this.patients = patients;
+	public void setPatient(Patient patient) {
+		this.patient = patient;
+	}
+
+	public String getTherapy() {
+		return therapy;
+	}
+
+	public void setTherapy(String therapy) {
+		this.therapy = therapy;
+	}
+
+	public String getSymptoms() {
+		return symptoms;
+	}
+
+	public void setSymptoms(String symptoms) {
+		this.symptoms = symptoms;
 	}
 }
