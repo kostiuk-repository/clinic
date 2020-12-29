@@ -3,33 +3,30 @@
 <head>
     <title>Edit patient</title>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-	<link type="text/css" rel="stylesheet" th:href="@{../css/bootstrap.min.css}" />
+	<link type="text/css" rel="stylesheet" href="../../css/bootstrap.min.css" th:href="@{/css/bootstrap.min.css}" />
 </head>
 <body>
 <div class="container">
-	<h1>Edit patient</h1>
+	<h1>Edit Doctor</h1>
 	<div class="col-md-4">
-		<form th:object="${patient}" th:action="@{../save}" action="#" method="post">
+		<form th:object="${doctor}" th:action="@{saveDoctor}" action="#" method="post">
 			<input type="hidden" th:field="*{id}" class="form-control"/>
-			<input type="text" th:field="*{firstName}" class="form-control"
-				placeholder="Firstname" />
+			<input type="text" th:field="*{fio}" class="form-control"
+				   placeholder="FIO" />
 			<div style="clear: both; display: block; height: 10px;"></div>
-			<input type="text" th:field="*{lastName}" class="form-control"
-				placeholder="Lastname" />
+			<input type="text" th:field="*{email}" class="form-control"
+				   placeholder="Email" />
 			<div style="clear: both; display: block; height: 10px;"></div>
-			<input type="text" th:field="*{ward}" class="form-control"
-				placeholder="Ward" />
-			<div style="clear: both; display: block; height: 10px;"></div>	
-			<input type="text" th:field="*{doctor}" class="form-control"
-				placeholder="Doctor" />
+			<input type="text" th:field="*{post}" class="form-control"
+				   placeholder="Post" />
 			<div style="clear: both; display: block; height: 10px;"></div>
-			<input type="date" class="form-control" th:field="*{dateOfRegistration}"
-				   th:value="${#dates.format(dateOfRegistration, 'dd-MM-yyyy')}" />
+			<input type="text" th:field="*{address}" class="form-control"
+				   placeholder="Address" />
 			<div style="clear: both; display: block; height: 10px;"></div>
-			<input type="date" class="form-control" th:field="*{dateOfDischarge}"
-				   th:value="${#dates.format(dateOfDischarge, 'dd-MM-yyyy')}" />
+			<input type="text" th:field="*{telephoneNumber}" class="form-control"
+				   placeholder="Telephone Number" />
 			<div style="clear: both; display: block; height: 10px;"></div>
-			<input type="submit" class="btn btn-primary" value="Save"></input>
+			<input type="submit" class="btn btn-primary" value="Save">
 		</form>
 	</div>
 </div>

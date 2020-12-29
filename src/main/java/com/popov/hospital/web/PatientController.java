@@ -40,7 +40,7 @@ public class PatientController {
 				patients.removeAll(patients.stream().filter(patient -> !patient.getFirstName().equalsIgnoreCase(firstname)).collect(Collectors.toList()));
 			}
 			if(lastname != null && !lastname.isEmpty()){
-				patients.removeAll(patients.stream().filter(patient -> !patient.getFirstName().equalsIgnoreCase(lastname)).collect(Collectors.toList()));
+				patients.removeAll(patients.stream().filter(patient -> !patient.getLastName().equalsIgnoreCase(lastname)).collect(Collectors.toList()));
 			}
 			if(ward != null && !ward.isEmpty()){
 				patients.removeAll(patients.stream().filter(patient -> !patient.getWard().equalsIgnoreCase(ward)).collect(Collectors.toList()));

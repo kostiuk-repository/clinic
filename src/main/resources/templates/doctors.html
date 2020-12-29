@@ -20,21 +20,21 @@
 		</form>
 	</div>
 	<div class="col-md-4" style="padding:0 20px">
-		<form>
+		<form th:action="@{/doctors}">
 			<input type="text" class="form-control"
-				   placeholder="FIO" />
+				   placeholder="FIO" th:name="fio"/>
 			<div style="clear: both; display: block; height: 10px;"></div>
 			<input type="text" class="form-control"
-				   placeholder="Post" />
+				   placeholder="Post" th:name="post"/>
 			<div style="clear: both; display: block; height: 10px;"></div>
 			<input type="text" class="form-control"
-				   placeholder="Address" />
+				   placeholder="Address" th:name="address"/>
 			<div style="clear: both; display: block; height: 10px;"></div>
 			<input type="text" class="form-control"
-				   placeholder="Email" />
+				   placeholder="Email" th:name="email"/>
 			<div style="clear: both; display: block; height: 10px;"></div>
 			<input type="text" class="form-control"
-				   placeholder="Telephone Number" />
+				   placeholder="Telephone Number" th:name="telephoneNumber"/>
 			<div style="clear: both; display: block; height: 10px;"></div>
 			<input type="submit" class="btn btn-primary" value="Apply">
 		</form>
