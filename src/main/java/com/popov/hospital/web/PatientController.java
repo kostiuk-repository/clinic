@@ -58,11 +58,20 @@ public class PatientController {
     	model.addAttribute("patient", new Patient());
 		model.addAttribute("doctors", doctorRepository.findAll());
         return "addPatient";
-    }	
+    }
 
-    @RequestMapping(value = "/edit/{id}")
+	@RequestMapping(value = "addNewDiagnose/{id}")
+	public String addNewDiagnose(@PathVariable("id") String patientId, Model model){
+		Optional<Patient> byId = patientRepository.findById(Long.valueOf(patientId));
+		model.addAttribute("patient", byId.get());
+		model.addAttribute("diagnose", new Diagnose());
+		return "addDiagnose";
+	}
+
+	@RequestMapping(value = "/edit/{id}")
     public String editPatient(@PathVariable("id") Long patientId, Model model){
     	model.addAttribute("patient", patientRepository.findById(patientId));
+    	model.addAttribute("doctors", doctorRepository.findAll());
         return "editPatient";
     }	    
     
@@ -71,6 +80,16 @@ public class PatientController {
         patientRepository.save(patient);
     	return "redirect:/patients";
     }
+
+	@RequestMapping(value = "/addNewDiagnose/saveDiagnose/{id}", method = RequestMethod.POST)
+	public String saveDiagnose(Diagnose diagnose, @PathVariable("id") Long patientId, Model model){
+		Patient patient = patientRepository.findById(patientId).get();
+		patient.getDiagnoses().add(diagnose);
+		diagnose.setPatient(patient);
+		diagnoseRepository.save(diagnose);
+		patientRepository.save(patient);
+		return "redirect:/addPatientDiagnose/" + patientId;
+	}
     
     @RequestMapping(value = "/delete/{id}", method = RequestMethod.GET)
     public String deletePatient(@PathVariable("id") Long patientId, Model model) {
@@ -81,7 +100,7 @@ public class PatientController {
     @RequestMapping(value = "addPatientDiagnose/{id}", method = RequestMethod.GET)
     public String addDiagnose(@PathVariable("id") Long patientId, Model model){
 
-    		model.addAttribute("diagnoses", diagnoseRepository.findAll());
+    		model.addAttribute("diagnoses", diagnoseRepository.findByPatientId(patientId));
     		model.addAttribute("patient", patientRepository.findById(patientId).get());
     		return "addPatientDiagnose";
     }

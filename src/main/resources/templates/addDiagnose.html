@@ -1,0 +1,32 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Add patient</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+	<link type="text/css" rel="stylesheet" th:href="@{../css/bootstrap.min.css}" />
+</head>
+<body>
+<div class="container">
+	<div class="col-md-12  align-items-center justify-content-center" style=" text-align: center;">
+		<h1>New Diagnose</h1>
+	</div>
+	<div class="col-md-4">
+
+	</div>
+	<div class="col-md-4">
+		<form th:object="${diagnose}" th:action="@{saveDiagnose/{id}(id=${patient.id})}" action="#" method="post">
+			<input type="text" th:field="*{name}" class="form-control"
+				   placeholder="Name" />
+			<div style="clear: both; display: block; height: 10px;"></div>
+			<input type="text" th:field="*{therapy}" class="form-control"
+				   placeholder="Therapy" />
+			<div style="clear: both; display: block; height: 10px;"></div>
+			<input type="text" th:field="*{symptoms}" class="form-control"
+				   placeholder="Symptoms" />
+			<div style="clear: both; display: block; height: 10px;"></div>
+			<input type="submit" class="btn btn-primary" value="Save">
+		</form>
+	</div>
+</div>
+</body>
+</html>

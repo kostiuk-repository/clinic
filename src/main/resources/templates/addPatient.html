@@ -25,7 +25,6 @@
 				placeholder="Ward" />
 			<div style="clear: both; display: block; height: 10px;"></div>
 			<select class="form-control" th:field="*{doctor.id}">
-				<option value="0">select doctor</option>
 				<option th:each="doctor : ${doctors}" th:value="${doctor.id}" th:text="${doctor.fio}"></option>
 			</select>
 			<div style="clear: both; display: block; height: 10px;"></div>

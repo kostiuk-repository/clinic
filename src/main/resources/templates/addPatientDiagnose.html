@@ -19,13 +19,12 @@
 
 				</div>
 			</div>
-				<input sec:authorize="hasAuthority('DOCTOR')" type="submit" name="action" class="btn btn-primary" value="Save">
 				<input type="submit" name="action" class="btn btn-default" value="Back">
 		</form>
 	</div>
 	<div class="col-md-6 align-items-center justify-content-center" style=" text-align: center;"><h1>Hospital history</h1></div>
 	<div class="col-md-2 align-items-center justify-content-center" style=" text-align: center;">
-		<a sec:authorize="hasAuthority('DOCTOR')" href="/addDiagnose" class="btn btn-primary">Add Diagnose</a>
+		<a sec:authorize="hasAuthority('DOCTOR')" th:href="@{/addNewDiagnose/{id}(id=${patient.id})}" class="btn btn-primary">Add Diagnose</a>
 	</div>
 	<div class="col-md-8" style="padding:0 20px">
 		<table class="table table-striped">
@@ -33,15 +32,11 @@
 				<th>Diagnose</th>
 				<th>Therapy</th>
 				<th>Symptoms</th>
-				<th>Actions</th>
 			</tr>
 			<tr th:each = "diagnose : ${diagnoses}">
 				<td th:text="${diagnose.name}"></td>
 				<td th:text="${diagnose.therapy}"></td>
 				<td th:text="${diagnose.symptoms}"></td>
-				<td>
-					<a sec:authorize="hasAnyAuthority('DOCTOR')" th:href="@{//{id}(id=${patient.id})}" class="btn btn-primary btn-xs">Edit Diagnose</a>
-				</td>
 			</tr>
 		</table>
 	</div>
