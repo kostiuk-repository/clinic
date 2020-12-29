@@ -1,12 +1,16 @@
 <!DOCTYPE HTML>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
-    <title>Add patient</title>
+    <title>Sign Up New Doctor</title>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 	<link type="text/css" rel="stylesheet" th:href="@{../css/bootstrap.min.css}" />
 </head>
 <body>
-	<h1>Sign-up</h1>
+	<div class="col-md-12  align-items-center justify-content-center" style=" text-align: center;">
+		<h1>Sign Up New Doctor</h1>
+	</div>
+	<div class="col-md-4">
+	</div>
 	<div class="col-md-4">
 		<form th:object="${signupform}" th:action="@{/saveuser}" action="#" method="post">
 			<input type="text" th:field="*{username}" class="form-control"

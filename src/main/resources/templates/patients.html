@@ -20,22 +20,22 @@
 		</form>
 	</div>
 	<div class="col-md-4" style="padding:0 20px">
-		<form>
+		<form th:action="@{/patients}">
 			<input type="text" class="form-control"
-				   placeholder="Firstname" />
-			<div style="clear: both; display: block; height: 10px;"></div>
-			<input type="text" class="form-control"
-				   placeholder="Lastname" />
+				   placeholder="Firstname" th:name="firstname" />
 			<div style="clear: both; display: block; height: 10px;"></div>
 			<input type="text" class="form-control"
-				   placeholder="Ward" />
+				   placeholder="Lastname" th:name="lastname" />
 			<div style="clear: both; display: block; height: 10px;"></div>
 			<input type="text" class="form-control"
-				   placeholder="Doctor" />
+				   placeholder="Ward" th:name="ward" />
 			<div style="clear: both; display: block; height: 10px;"></div>
-			<input type="date" class="form-control" />
+			<input type="text" class="form-control"
+				   placeholder="Doctor" th:name="doctorName" />
 			<div style="clear: both; display: block; height: 10px;"></div>
-			<input type="date" class="form-control" />
+			<input type="date" class="form-control" th:name="dateOfRegistration" />
+			<div style="clear: both; display: block; height: 10px;"></div>
+			<input type="date" class="form-control" th:name="dateOfDischarge" />
 			<div style="clear: both; display: block; height: 10px;"></div>
 			<input type="submit" class="btn btn-primary" value="Apply" >
 		</form>

@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @Controller
 public class PatientController {
@@ -26,11 +27,29 @@ public class PatientController {
     }	
 	
 	@RequestMapping("/patients")
-	public String index(Model model) {
-		List<Patient> patients = (List<Patient>) patientRepository.findAll();
+	public String index(Model model,
+						@RequestParam(value="firstname", required=false) String firstname,
+						@RequestParam(value="lastname", required=false) String lastname,
+						@RequestParam(value="ward", required=false) String ward,
+						@RequestParam(value="doctorName", required=false) String doctorName,
+						@RequestParam(value="dateOfRegistration", required=false) String dateOfRegistration,
+						@RequestParam(value="dateOfDischarge", required=false) String dateOfDischarge) {
+			List<Patient> patients = (List<Patient>) patientRepository.findAll();
 
-		model.addAttribute("patients", patients);
-		model.addAttribute("doctors", doctorRepository.findAll());
+			if(firstname != null && !firstname.isEmpty()){
+				patients.removeAll(patients.stream().filter(patient -> !patient.getFirstName().equalsIgnoreCase(firstname)).collect(Collectors.toList()));
+			}
+			if(lastname != null && !lastname.isEmpty()){
+				patients.removeAll(patients.stream().filter(patient -> !patient.getFirstName().equalsIgnoreCase(lastname)).collect(Collectors.toList()));
+			}
+			if(ward != null && !ward.isEmpty()){
+				patients.removeAll(patients.stream().filter(patient -> !patient.getWard().equalsIgnoreCase(ward)).collect(Collectors.toList()));
+			}
+			if(doctorName != null && !doctorName.isEmpty()){
+				patients.removeAll(patients.stream().filter(patient -> !patient.getDoctor().getFio().equalsIgnoreCase(doctorName)).collect(Collectors.toList()));
+			}
+			model.addAttribute("patients", patients);
+			model.addAttribute("doctors", doctorRepository.findAll());
     	return "patients";
     }
 
@@ -91,5 +110,5 @@ public class PatientController {
     @RequestMapping(value = "getPatient", method = RequestMethod.GET)
     public @ResponseBody List<Patient> getPatients() {
             return (List<Patient>) patientRepository.findAll();
-    }      
+    }
 }
